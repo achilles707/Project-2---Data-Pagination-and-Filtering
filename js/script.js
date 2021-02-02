@@ -47,13 +47,13 @@ function showPage(list, page) {
                </div>
             </li>
          `;   
-         console.log(studentItem); 
+         console.log(studentList);
 
+         //console.log(studentItem);
+         studentList.insertAdjacentHTML('beforeend', 'studentItem');
       }
-      studentList.insertAdjacentHTML('beforeend', 'studentItem');
 
    }
-   // console.log(studentList);
 }
 // test call
 console.log(showPage(data, 1));
