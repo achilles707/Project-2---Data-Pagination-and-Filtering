@@ -48,15 +48,16 @@ function showPage(list, page) {
             </li>
          `;   
          console.log(studentItem); 
-      
+
       }
+      studentList.insertAdjacentHTML('beforeend', 'studentItem');
+
    }
-   console.log(studentList);
-   studentList.insertAdjacentHTML(beforeend, studentItem);
+   // console.log(studentList);
 }
 // test call
 console.log(showPage(data, 1));
-
+showPage(data, 1);
 /*
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
