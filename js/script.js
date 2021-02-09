@@ -58,7 +58,7 @@ function addPagination(list) {
    let active = '';
 
    // create button element
-   for(let i=1; i<=pages; i++) {
+   for(let i=1; i<=pages+1; i++) {
       let buttonElement = `
          <li>
             <button type='button'>${i}</button>
