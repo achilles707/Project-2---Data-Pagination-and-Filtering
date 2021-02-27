@@ -27,10 +27,10 @@ function showPage(list, page) {
       if (i >= startIndex && i < endIndex) {
          // build student element
          let studentItem = `
-            <li class="student cf">
+            <li class="student-item cf">
                <div class="student-details">
                   <img class="avatar" src=${data[i].picture.large} alt="profile picture"></img>
-                  <h3>${data[i].name.first + " " + data[i].name.last}</h3>S
+                  <h3>${data[i].name.first + " " + data[i].name.last}</h3>
                   <span class="email">${data[i].email}</span>
                </div>
                <div class="joined-details">
@@ -56,6 +56,7 @@ function addPagination(list) {
    const linkList = document.querySelector('.link-list');   
    linkList.innerHTML = '';
    let active = '';
+   
 
    // create button element
    for(let i=1; i<=pages+1; i++) {
@@ -65,11 +66,10 @@ function addPagination(list) {
          </li>
       `;
       
-      // add buttons to the page
+      // add button to the page
       linkList.insertAdjacentHTML('beforeend', buttonElement);
    }
 
-   console.log(linkList);
    // set first button as active 
    active = document.querySelector('button');
    active.className = 'active';
@@ -91,7 +91,52 @@ function addPagination(list) {
 
 }
 
-// Call functions
+/*
+Create search bar and filtering
+*/
+function addSearchBar() {
+   
+   let searchBar = `
+      <label for="search" class="student-search">
+         <input id="search" onkeyup="searchAndFilter()" type="text" placeholder="Search by name...">
+         <button type="button" id ="search-button"><img src="img/icn-search.svg" alt="Search icon"></button>
+      </label>
+   `;
+   searchText = "";
+   let header = document.querySelector('.header');
+   header.insertAdjacentHTML('beforeEnd', searchBar);
+
+}
+
+function searchAndFilter(searchText, list) {
+
+   let newData = [];
+
+   // 1. Get input from the search:
+   searchText = document.getElementById('search').value.toLowerCase();
+   // 2. Loop through data:
+   for(let i=0; i < data.length; i++) {
+      // 2a. check if the studentItem contains the input:
+      if(data[i].name.first.toLowerCase().includes(searchText)) {
+         // 2aa. if it does, add to the new data set:
+         newData[i] = data[i];
+         
+      } else { 
+         // 2ab. if not, remove it from the new data set:
+
+      }       
+   } 
+   // clear the page:
+
+   // call the showPage and addPagination functions using the new data set:
+   showPage(newData, 1);
+   addPagination(newData);
+}
+
+// add elements and add pages
 showPage(data, 1);
 addPagination(data);
-console.log(data);
+
+// add search bar and search function
+addSearchBar();
+searchAndFilter(searchText, data);
