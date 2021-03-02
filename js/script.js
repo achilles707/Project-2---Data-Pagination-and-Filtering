@@ -98,35 +98,34 @@ function addSearchBar() {
    
    let searchBar = `
       <label for="search" class="student-search">
-         <input id="search" onkeyup="searchAndFilter()" type="text" placeholder="Search by name...">
+         <input id="search" onkeyup="searchAndFilter(data)" type="text" placeholder="Search by name...">
          <button type="button" id ="search-button"><img src="img/icn-search.svg" alt="Search icon"></button>
       </label>
    `;
-   searchText = "";
+   
    let header = document.querySelector('.header');
    header.insertAdjacentHTML('beforeEnd', searchBar);
 
 }
 
-function searchAndFilter(searchText, list) {
-
+function searchAndFilter(list) {
+   console.log(list);
    let newData = [];
 
    // 1. Get input from the search:
-   searchText = document.getElementById('search').value.toLowerCase();
+   const searchText = document.getElementById('search').value.toLowerCase();
    // 2. Loop through data:
-   for(let i=0; i < data.length; i++) {
+   for(let i=0; i < list.length; i++) {
       // 2a. check if the studentItem contains the input:
       if(data[i].name.first.toLowerCase().includes(searchText)) {
          // 2aa. if it does, add to the new data set:
-         newData[i] = data[i];
+         newData.push(i);
          
       } else { 
          // 2ab. if not, remove it from the new data set:
-
-      }       
+         newData.pop();
+      }     
    } 
-   // clear the page:
 
    // call the showPage and addPagination functions using the new data set:
    showPage(newData, 1);
@@ -137,6 +136,15 @@ function searchAndFilter(searchText, list) {
 showPage(data, 1);
 addPagination(data);
 
-// add search bar and search function
+// add search bar
 addSearchBar();
-searchAndFilter(searchText, data);
+
+/*
+List of things to fix from slack advice:
+   1. use list instead of data as the array in searchAndFilter  done
+   2. use push method to add elements to the newData array,  done
+         don't replace after each iteration
+         (line 122, newData.push(data[i]); )
+   3. move searchText from searchBar function and make it a const  done
+   4. remove searchText from the function call argument and declaration  done
+*/
