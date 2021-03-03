@@ -109,25 +109,21 @@ function addSearchBar() {
 }
 
 function searchAndFilter(list) {
-   console.log(list);
    let newData = [];
 
-   // 1. Get input from the search:
+   // 1. Get input from user search:
    const searchText = document.getElementById('search').value.toLowerCase();
    // 2. Loop through data:
-   for(let i=0; i < list.length; i++) {
-      // 2a. check if the studentItem contains the input:
-      if(data[i].name.first.toLowerCase().includes(searchText)) {
-         // 2aa. if it does, add to the new data set:
+   for(let i=0; i<list.length; i++) {
+      // 2a. check if studentItems contain the search text:
+      let name = list[i].name.first.toLowerCase() + ' ' + list[i].name.last.toLowerCase();
+      if(name.includes(searchText)) {
+         // 2aa. if so, add to the new data set:
          newData.push(i);
-         
-      } else { 
-         // 2ab. if not, remove it from the new data set:
-         newData.pop();
-      }     
-   } 
+      }
+   }
 
-   // call the showPage and addPagination functions using the new data set:
+   // update the page content to only display new list:
    showPage(newData, 1);
    addPagination(newData);
 }
@@ -138,13 +134,3 @@ addPagination(data);
 
 // add search bar
 addSearchBar();
-
-/*
-List of things to fix from slack advice:
-   1. use list instead of data as the array in searchAndFilter  done
-   2. use push method to add elements to the newData array,  done
-         don't replace after each iteration
-         (line 122, newData.push(data[i]); )
-   3. move searchText from searchBar function and make it a const  done
-   4. remove searchText from the function call argument and declaration  done
-*/
