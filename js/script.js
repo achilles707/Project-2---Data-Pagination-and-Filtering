@@ -45,21 +45,20 @@ function showPage(list, page) {
    }
 }
 
-
 /*
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 function addPagination(list) {
    // vars for pagination
-   const pages = list.length / 9;
+   const pages = Math.ceil(list.length / 9);
    const linkList = document.querySelector('.link-list');   
    linkList.innerHTML = '';
    let active = '';
    
 
    // create button element
-   for(let i=1; i<=pages+1; i++) {
+   for(let i=1; i<=pages; i++) {
       let buttonElement = `
          <li>
             <button type='button'>${i}</button>
@@ -126,6 +125,8 @@ function searchAndFilter(list) {
    // update the page content to only display new list:
    showPage(newData, 1);
    addPagination(newData);
+
+   console.log(newData);
 }
 
 // add elements and add pages
@@ -133,4 +134,4 @@ showPage(data, 1);
 addPagination(data);
 
 // add search bar
-addSearchBar();
+//addSearchBar();
